@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 function auth(to, from) {
   if (!localStorage.getItem('access_token')) {
-    return { name: 'register' };
+    return { name: 'login' };
   }
 }
 
@@ -25,6 +25,12 @@ const router = createRouter({
       name: 'register',
       beforeEnter: guest,
       component: () => import('@/views/Auth/RegisterView.vue'),
+    },
+    {
+      path: '/login',
+      name: 'login',
+      beforeEnter: guest,
+      component: () => import('@/views/Auth/LoginView.vue'),
     },
     {
       path: '/vehicles',
