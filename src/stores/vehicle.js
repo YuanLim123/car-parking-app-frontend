@@ -6,6 +6,7 @@ export const useVehicle = defineStore("vehicle", () => {
   const router = useRouter();
   const errors = reactive({});
   const loading = ref(false);
+  const vehicles = ref([]);
   const form = reactive({
     plate_number: "",
     description: "",
@@ -17,7 +18,15 @@ export const useVehicle = defineStore("vehicle", () => {
  
     errors.value = {};
   }
- 
+
+   function getVehicles() {
+    return window.axios
+      .get("vehicles")
+      .then((response) => {
+        vehicles.value = response.data.data;
+      });
+  }
+
   function storeVehicle() {
     if (loading.value) return;
  
@@ -37,5 +46,5 @@ export const useVehicle = defineStore("vehicle", () => {
       .finally(() => (loading.value = false));
   }
  
-  return { form, errors, loading, resetForm, storeVehicle };
+  return { form, errors, loading, vehicles, resetForm, getVehicles, storeVehicle };
 });
