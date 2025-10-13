@@ -1,25 +1,22 @@
 <script setup>
-import { onMounted } from "vue";
-import { useVehicle } from "@/stores/vehicle";
- 
+import { onMounted } from 'vue';
+import { useVehicle } from '@/stores/vehicle';
+
 const store = useVehicle();
- 
+
 onMounted(store.getVehicles);
 </script>
- 
+
 <template>
   <div class="flex flex-col mx-auto md:w-96 w-full">
     <h1 class="text-2xl font-bold mb-4 text-center">My vehicles</h1>
- 
-    <RouterLink
-      :to="{ name: 'vehicles.create' }"
-      class="btn btn-primary w-full"
-    >
+
+    <RouterLink :to="{ name: 'vehicles.create' }" class="btn btn-primary w-full">
       Add vehicle
     </RouterLink>
- 
+
     <div class="border-t h-[1px] my-6"></div>
- 
+
     <div class="flex flex-col gap-2">
       <div
         v-for="vehicle in store.vehicles"
@@ -35,11 +32,13 @@ onMounted(store.getVehicles);
           </div>
         </div>
         <div class="flex gap-1">
-          <button type="button" class="btn btn-secondary text-sm">Edit</button>
-          <button
-            type="button"
-            class="btn text-white bg-red-600 hover:bg-red-500 text-sm"
+          <RouterLink
+            :to="{ name: 'vehicles.edit', params: { id: vehicle.id } }"
+            class="btn btn-secondary text-sm"
           >
+            Edit
+          </RouterLink>
+          <button type="button" class="btn text-white bg-red-600 hover:bg-red-500 text-sm">
             X
           </button>
         </div>
