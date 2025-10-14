@@ -20,8 +20,11 @@ export const useVehicle = defineStore('vehicle', () => {
   }
 
   function getVehicles() {
-    return window.axios.get('vehicles').then((response) => {
+    return window.axios
+    .get('vehicles')
+    .then((response) => {
       vehicles.value = response.data.data;
+      return response.data.data;
     });
   }
 
