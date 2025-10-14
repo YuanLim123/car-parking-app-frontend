@@ -4,6 +4,15 @@ import { useVehicle } from '@/stores/vehicle';
 
 const store = useVehicle();
 
+const deleteVehicle = (vehicle) => {
+  let deleteConfirmation = confirm(
+    `Are you sure you want to delete vehicle ${vehicle.plate_number}?`,
+  );
+
+  if (deleteConfirmation) {
+    store.deleteVehicle(vehicle);
+  }
+};
 onMounted(store.getVehicles);
 </script>
 
@@ -38,7 +47,11 @@ onMounted(store.getVehicles);
           >
             Edit
           </RouterLink>
-          <button type="button" class="btn text-white bg-red-600 hover:bg-red-500 text-sm">
+          <button
+            type="button"
+            class="btn text-white bg-red-600 hover:bg-red-500 text-sm"
+            @click="deleteVehicle(vehicle)"
+          >
             X
           </button>
         </div>
