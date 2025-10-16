@@ -7,6 +7,7 @@ export const useParking = defineStore('parking', () => {
   const errors = reactive({});
   const loading = ref(false);
   const parkings = ref([]);
+  const stoppedParkings = ref([]);
   const form = reactive({
     vehicle_id: null,
     zone_id: null,
@@ -44,9 +45,26 @@ export const useParking = defineStore('parking', () => {
     });
   }
 
+  function getStoppedParkings() {
+    return window.axios.get('parkings/history').then((response) => {
+      stoppedParkings.value = response.data.data;
+    });
+  }
+
   function stopParking(parking) {
     window.axios.put(`parkings/${parking.id}`).then(getActiveParkings);
   }
 
-  return { form, errors, loading, parkings, resetForm, startParking, getActiveParkings, stopParking };
+  return {
+    form,
+    errors,
+    loading,
+    parkings,
+    stoppedParkings,
+    resetForm,
+    startParking,
+    getActiveParkings,
+    getStoppedParkings,
+    stopParking,
+  };
 });
