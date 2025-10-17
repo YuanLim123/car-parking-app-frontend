@@ -7,6 +7,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.withCredentials = true;
 //window.axios.defaults.baseURL = 'http://car-parking-app.test/api/v1';
 window.axios.defaults.baseURL = 'http://127.0.0.1:8000/api/v1';
+window.serverBaseUrl = 'http://127.0.0.1:8000';
 
 window.axios.interceptors.response.use(
   (response) => response,

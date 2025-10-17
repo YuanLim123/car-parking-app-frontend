@@ -1,8 +1,24 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
 import { useAuth } from '@/stores/auth';
+import { useProfile } from './stores/profile';
+import { onMounted, computed } from 'vue';
 
 const auth = useAuth();
+const profileStore = useProfile();
+
+onMounted(() => {
+  if (auth.check) {
+    profileStore.fetchProfile();
+  }
+});
+
+const profileImageUrl = computed(() => {
+  if (profileStore.form.url) {
+    return window.serverBaseUrl + profileStore.form.url;
+  }
+  return null;
+});
 </script>
 
 <template>
@@ -34,6 +50,11 @@ const auth = useAuth();
         </div>
         <div class="flex gap-4 items-center">
           <template v-if="auth.check">
+            <img
+              v-if="profileImageUrl"
+              class="w-8 h-8 rounded-full object-cover"
+              :src="profileImageUrl"
+            />
             <RouterLink class="router-link" :to="{ name: 'profile.edit' }"> Profile </RouterLink>
             <RouterLink class="router-link" :to="{ name: 'profile.change-password' }">
               Change Password

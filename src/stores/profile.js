@@ -9,12 +9,14 @@ export const useProfile = defineStore('profile', () => {
     email: '',
     password: '',
     remember: false,
+    url: '',
   });
 
   function resetForm() {
     form.email = '';
     form.password = '';
     form.remember = false;
+    form.url = '';
 
     errors.value = {};
     status.value = '';
@@ -24,6 +26,7 @@ export const useProfile = defineStore('profile', () => {
     return window.axios.get('profile').then((response) => {
       form.name = response.data.name;
       form.email = response.data.email;
+      form.url = response.data.url;
     });
   }
 
@@ -49,5 +52,5 @@ export const useProfile = defineStore('profile', () => {
       });
   }
 
-  return { form, errors, loading, resetForm, fetchProfile, updateProfile, status };
+  return { form, errors, loading, status, resetForm, fetchProfile, updateProfile };
 });

@@ -56,7 +56,7 @@ onBeforeUnmount(store.resetForm);
         <ValidationError :errors="store.errors" field="password" />
       </div>
 
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2 mb-4">
         <label for="password_confirmation" class="required"> Confirm password </label>
         <input
           v-model="store.form.password_confirmation"
@@ -68,6 +68,19 @@ onBeforeUnmount(store.resetForm);
           required
           :disabled="store.loading"
         />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="profile_img" class="required"> Profile Image </label>
+        <input
+          id="profile_img"
+          name="profile_img"
+          type="file"
+          class="form-input"
+          :disabled="store.loading"
+          @change = "(e) => store.handleImageUpload(e.target.files[0])"
+        />
+        <ValidationError :errors="store.errors" field="file" />
       </div>
 
       <div class="border-t h-[1px] my-6"></div>
