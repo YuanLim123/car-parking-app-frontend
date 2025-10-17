@@ -1,15 +1,15 @@
 <script setup>
-import { useParking } from "@/stores/parking";
- 
+import { useParking } from '@/stores/parking';
+
 const store = useParking();
- 
+
 store.getStoppedParkings();
 </script>
- 
+
 <template>
   <div class="flex flex-col mx-auto md:w-96 w-full">
     <h1 class="text-2xl font-bold mb-4 text-center">Parking history</h1>
- 
+
     <div class="flex flex-col gap-1">
       <div
         v-for="parking in store.stoppedParkings"
@@ -35,9 +35,9 @@ store.getStoppedParkings();
           }}</span>
           <span class="pt-0.5">&nbsp;&euro;</span>
         </div>
-        <button type="button" class="btn btn-secondary uppercase">
+        <RouterLink :to="{ name: 'parkings.show', params: {id : parking.id }}" class="btn btn-secondary uppercase">
           view details
-        </button>
+        </RouterLink>
       </div>
     </div>
   </div>
