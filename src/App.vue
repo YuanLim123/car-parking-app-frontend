@@ -52,8 +52,9 @@ const profileImageUrl = computed(() => {
           <template v-if="auth.check">
             <img
               v-if="profileImageUrl"
-              class="w-8 h-8 rounded-full object-cover"
+              class="w-8 h-8 rounded-full cursor-pointer"
               :src="profileImageUrl"
+              @click="profileStore.downloadImg"
             />
             <RouterLink class="router-link" :to="{ name: 'profile.edit' }"> Profile </RouterLink>
             <RouterLink class="router-link" :to="{ name: 'profile.change-password' }">

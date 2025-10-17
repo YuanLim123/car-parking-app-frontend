@@ -52,5 +52,24 @@ export const useProfile = defineStore('profile', () => {
       });
   }
 
-  return { form, errors, loading, status, resetForm, fetchProfile, updateProfile };
+  // https://stackoverflow.com/questions/67983200/download-file-from-backend-laravel-using-vue-as-frontend
+  async function downloadImg() {
+    return window
+      .axios({
+        url: 'profile/downloadProfileImg',
+        method: 'GET',
+        responseType: 'blob',
+      })
+      .then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'profile.png');
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      });
+  }
+
+  return { form, errors, loading, status, resetForm, fetchProfile, updateProfile, downloadImg };
 });

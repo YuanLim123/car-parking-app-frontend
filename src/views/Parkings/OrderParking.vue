@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeUnmount, onMounted } from 'vue';
+import { onBeforeUnmount } from 'vue';
 import { useVehicle } from '@/stores/vehicle';
 import { useZone } from '@/stores/zone';
 import { useParking } from '@/stores/parking';
