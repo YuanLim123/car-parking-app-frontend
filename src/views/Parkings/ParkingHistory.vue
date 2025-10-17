@@ -7,9 +7,9 @@ store.getStoppedParkings();
 </script>
 
 <template>
+  <PageLoadingSpinner v-show="store.loading"/>
   <div class="flex flex-col mx-auto md:w-96 w-full">
     <h1 class="text-2xl font-bold mb-4 text-center">Parking history</h1>
-
     <div class="flex flex-col gap-1">
       <div
         v-for="parking in store.stoppedParkings"

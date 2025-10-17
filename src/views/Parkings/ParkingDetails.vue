@@ -5,7 +5,7 @@ import { useRoute } from "vue-router";
  
 const store = useParking();
 const route = useRoute();
- 
+
 watchEffect(async () => {
   store.getParking({ id: route.params.id });
 });
@@ -14,6 +14,7 @@ onBeforeUnmount(store.resetParkingDetails);
 </script>
  
 <template>
+  <PageLoadingSpinner v-show="store.loading"/>
   <div
     class="flex flex-col mx-auto md:w-96 w-full"
     v-if="store.parking.id !== undefined"

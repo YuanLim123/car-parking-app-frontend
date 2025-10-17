@@ -47,9 +47,13 @@ export const useParking = defineStore('parking', () => {
   }
 
   function getStoppedParkings() {
-    return window.axios.get('parkings/history').then((response) => {
+    loading.value = true;
+    return window.axios
+      .get('parkings/history')
+      .then((response) => {
       stoppedParkings.value = response.data.data;
-    });
+      })
+      .finally(() => (loading.value = false));
   }
 
   function stopParking(parking) {
@@ -57,9 +61,14 @@ export const useParking = defineStore('parking', () => {
   }
 
   function getParking(parking) {
-    return window.axios.get(`parkings/${parking.id}`).then((response) => {
-      parkingDetails.value = response.data.data;
-    });
+    loading.value = true;
+
+    return window.axios
+      .get(`parkings/${parking.id}`)
+      .then((response) => {
+        parkingDetails.value = response.data.data;
+      })
+      .finally(() => (loading.value = false));
   }
 
   function resetParkingDetails() {
